@@ -1,0 +1,46 @@
+{
+  "name": "cafesource/option",
+  "description": "The cafesource option",
+  "keywords": [
+    "cafesource",
+    "option"
+  ],
+  "license": "MIT",
+  "homepage": "https://cafesource.net",
+  "authors": [
+    {
+      "name": "Mahdi akbari",
+      "email": "mahdi75akbari@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*",
+    "cafesource/foundation": "^1.0"
+  },
+  "provide": {
+    "psr/container-implementation": "1.0"
+  },
+  "autoload": {
+    "files": [
+      "helpers/option.php"
+    ],
+    "psr-4": {
+      "Cafesource\\Option\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "files": []
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.x-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
