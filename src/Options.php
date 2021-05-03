@@ -47,7 +47,6 @@ class Options
 
         $option = $this->repository->findByKey($key);
         if ( $option ) {
-            $option = new Option($option->key, $option, $default);
             $this->autoload->set($key, $option);
 
             return $option;
@@ -143,7 +142,7 @@ class Options
     /**
      * @param string $key
      */
-    public function autoload( $key = 'autoload' )
+    public function autoload( string $key = 'autoload' )
     {
         $options = $this->repository->autoload($key);
 
