@@ -28,12 +28,6 @@ class OptionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cafesource::addRoute('options', __DIR__ . '/../routes/web.php', [
-            'prefix'     => admin()->prefix('options'),
-            'name'       => 'admin.options.',
-            'middleware' => 'admin'
-        ])->addLivewireComponent(['admin.option.index' => Index::class]);
-
         $this->loadMigrationsFrom(__DIR__ . '/Database/Migrations/');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'option');
 
@@ -41,8 +35,7 @@ class OptionServiceProvider extends ServiceProvider
             $this->config => config_path('option.php')
         ]);
 
-        $this->loadBookmarks();
-        $this->loadMenus();
+        $this->loadAdminConfig();
     }
 
     public function mergeConfigs()
@@ -74,6 +67,30 @@ class OptionServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Load admin panel config
+     */
+    public function loadAdminConfig()
+    {
+        $prefix = 'admin/settings';
+        if ( function_exists('admin') )
+            $prefix = admin()->prefix('settings');
+
+        Cafesource::addRoute('options', __DIR__ . '/../routes/web.php', [
+            'prefix'     => $prefix,
+            'name'       => 'admin.options.',
+            'middleware' => 'admin'
+        ])->addLivewireComponent([
+            'admin.option.index' => Index::class
+        ]);
+
+        $this->loadBookmarks();
+        $this->loadMenus();
+    }
+
+    /**
+     * Load the settings menus
+     */
     private function loadMenus()
     {
         if ( !function_exists('adminMenu') )
@@ -83,7 +100,7 @@ class OptionServiceProvider extends ServiceProvider
             $category->add('options', [
                 'title'       => __('Settings'),
                 'route'       => route('admin.options.index'),
-                'active'      => request()->is('admin/options'),
+                'active'      => request()->is('admin/settings'),
                 'icon'        => 'fad fa-cogs',
                 'priority'    => 20,
                 'permission'  => 'options',
