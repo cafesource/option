@@ -3,7 +3,6 @@
 namespace Cafesource\Option;
 
 use Cafesource\Foundation\Facades\Cafesource;
-use Cafesource\Option\Http\Livewire\Index;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Container\Container as Application;
 
@@ -81,7 +80,7 @@ class OptionServiceProvider extends ServiceProvider
             'name'       => 'admin.options.',
             'middleware' => 'admin'
         ])->addLivewireComponent([
-            'admin.option.index' => Index::class
+            'admin.option.index' => \Cafesource\Option\Http\Livewire\Index::class
         ]);
 
         $this->loadBookmarks();
