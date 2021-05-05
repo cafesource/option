@@ -15,17 +15,4 @@ class Option extends Model
         'value',
         'option'
     ];
-
-    /**
-     * Return the value column string
-     */
-    public function __toString()
-    {
-        return (string) $this->getAttribute('value');
-    }
-
-    public function isNull()
-    {
-        return is_null($this->getAttribute('value'));
-    }
 }
