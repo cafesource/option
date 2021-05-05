@@ -3,7 +3,7 @@
 
 namespace Cafesource\Option\Facades;
 
-use Cafesource\Option\Options as OptionModule;
+use Cafesource\Option\Option as OptionModule;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Facade;
  * @method static mixed update(string $key, mixed $value = null, string $option = null)
  * @method static mixed updateOrAdd(string $key, mixed $value = null, string $option = null)
  * @method static bool remove(mixed $key)
+ * @method static bool filter(string $key, $callback)
+ * @method static bool addFilter(string $key, callable $callback, int $arguments = 1, int $priority = 20)
+ *
  * @method static void autoload()
  *
  * @package Cafesource\Option\Facades
