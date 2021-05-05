@@ -2,15 +2,15 @@
 
 namespace Cafesource\Option\Repositories;
 
-use Cafesource\Option\Models\Option as OptionModel;
+use Illuminate\Database\Eloquent\Model;
 
 class Option
 {
-    protected $option = null;
+    protected Model $option;
 
-    public function __construct()
+    public function __construct( Model $option )
     {
-        $this->option = new OptionModel();
+        $this->option = $option;
     }
 
     /**
@@ -60,7 +60,7 @@ class Option
      */
     public function autoload( $key = 'autoload' )
     {
-        return $this->option->where('option', $key)->get();
+        return $this->option->where('option', $key)->get()->toArray();
     }
 
     /**
@@ -105,13 +105,8 @@ class Option
      *
      * @return mixed
      */
-    public function update( $key, $value, $option = null )
+    public function update( $key, $value )
     {
-        $value = ['value' => $value];
-
-        if ( !is_null($option) )
-            $value[ 'option' ] = $option;
-
         return $this->option->where('key', $key)->update($value);
     }
 
