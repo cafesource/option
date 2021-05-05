@@ -51,7 +51,7 @@ class OptionServiceProvider extends ServiceProvider
     protected function registerManager( Application $app )
     {
         $app->singleton('cafesource.option', function ( $app ) {
-            return new Options($app[ 'config' ][ 'option' ]);
+            return new Option($app[ 'config' ][ 'option' ]);
         });
     }
 
@@ -63,7 +63,7 @@ class OptionServiceProvider extends ServiceProvider
     protected function registerBindings( Application $app )
     {
         $app->bind('cafesource.option', function ( $app ) {
-            return new Options($app[ 'config' ][ 'option' ]);
+            return new Option($app[ 'config' ][ 'option' ]);
         });
     }
 
