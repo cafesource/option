@@ -4,6 +4,7 @@ namespace Cafesource\Option;
 
 use Cafesource\Foundation\Facades\Cafesource;
 use Illuminate\Support\ServiceProvider;
+use Cafesource\Admin\Facades\AdminMenu;
 use Illuminate\Contracts\Container\Container as Application;
 
 class OptionServiceProvider extends ServiceProvider
@@ -95,7 +96,7 @@ class OptionServiceProvider extends ServiceProvider
         if ( !function_exists('adminMenu') )
             return;
 
-        adminMenu()->category('general', function ( $category ) {
+        AdminMenu::add('general', function ( $category ) {
             $category->add('options', [
                 'title'       => __('Settings'),
                 'route'       => route('admin.options.index'),
