@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Cafesource\Option;
-
 
 use Cafesource\Foundation\Facades\Cafesource;
 use Cafesource\Option\Repositories\Option as OptionRepository;
