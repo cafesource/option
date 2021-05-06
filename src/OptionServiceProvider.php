@@ -2,6 +2,7 @@
 
 namespace Cafesource\Option;
 
+use Cafesource\Admin\Bookmarks\Bookmark;
 use Cafesource\Foundation\Facades\Cafesource;
 use Illuminate\Support\ServiceProvider;
 use Cafesource\Admin\Facades\AdminMenu;
@@ -35,7 +36,8 @@ class OptionServiceProvider extends ServiceProvider
             $this->config => config_path('option.php')
         ]);
 
-        $this->loadAdminConfig();
+        $this->loadMenus();
+//        $this->loadBookmarks();
     }
 
     public function mergeConfigs()
@@ -58,7 +60,7 @@ class OptionServiceProvider extends ServiceProvider
     /**
      * The option binding
      *
-     * @param $app
+     * @param Application $app
      */
     protected function registerBindings( Application $app )
     {
@@ -68,24 +70,11 @@ class OptionServiceProvider extends ServiceProvider
     }
 
     /**
-     * Load admin panel config
-     */
-    public function loadAdminConfig()
-    {
-        $prefix = 'admin/settings';
-        if ( function_exists('admin') )
-            $prefix = admin()->prefix('settings');
-
-        $this->loadBookmarks();
-        $this->loadMenus();
-    }
-
-    /**
      * Load the settings menus
      */
     private function loadMenus()
     {
-        if ( !function_exists('adminMenu') )
+        if ( !class_exists(AdminMenu::class) )
             return;
 
         AdminMenu::add('general', function ( $category ) {
@@ -106,10 +95,19 @@ class OptionServiceProvider extends ServiceProvider
 
     private function loadBookmarks()
     {
-//        addAdminBookmark('settings', [
-//            'title' => __('Settings'),
-//            'route' => route('admin.options.index'),
-//            'icon'  => 'far fa-cogs'
-//        ], 21);
+        if ( !class_exists(Bookmark::class) )
+            return;
+
+        Bookmark::add('settings', function ( $settings ) {
+            $settings->info([
+                'title' => __('Settings'),
+                'route' => route('admin.options.index'),
+                'icon'  => 'far fa-cogs'
+            ]);
+
+            $settings->title(__('Settings'))
+                ->route(route('admin.options.index'))
+                ->icon('far fa-cogs');
+        }, 10);
     }
 }
