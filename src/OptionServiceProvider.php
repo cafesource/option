@@ -3,7 +3,6 @@
 namespace Cafesource\Option;
 
 use Cafesource\Admin\Bookmarks\Bookmark;
-use Cafesource\Foundation\Facades\Cafesource;
 use Illuminate\Support\ServiceProvider;
 use Cafesource\Admin\Facades\AdminMenu;
 use Illuminate\Contracts\Container\Container as Application;
@@ -37,7 +36,7 @@ class OptionServiceProvider extends ServiceProvider
         ]);
 
         $this->loadMenus();
-//        $this->loadBookmarks();
+        $this->loadBookmarks();
     }
 
     public function mergeConfigs()
@@ -77,8 +76,8 @@ class OptionServiceProvider extends ServiceProvider
         if ( !class_exists(AdminMenu::class) )
             return;
 
-        AdminMenu::add('general', function ( $category ) {
-            $category->add('options', [
+        AdminMenu::add('settings', function ( $settings ) {
+            $settings->add('options', [
                 'title'       => __('Settings'),
                 'route'       => route('admin.options.index'),
                 'active'      => request()->is('admin/settings'),
@@ -90,7 +89,7 @@ class OptionServiceProvider extends ServiceProvider
                 'keywords'    => ['options', 'create', 'list'],
                 'description' => 'The settings management'
             ]);
-        });
+        }, 50);
     }
 
     private function loadBookmarks()
@@ -99,12 +98,6 @@ class OptionServiceProvider extends ServiceProvider
             return;
 
         Bookmark::add('settings', function ( $settings ) {
-            $settings->info([
-                'title' => __('Settings'),
-                'route' => route('admin.options.index'),
-                'icon'  => 'far fa-cogs'
-            ]);
-
             $settings->title(__('Settings'))
                 ->route(route('admin.options.index'))
                 ->icon('far fa-cogs');
