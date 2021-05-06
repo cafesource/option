@@ -76,14 +76,6 @@ class OptionServiceProvider extends ServiceProvider
         if ( function_exists('admin') )
             $prefix = admin()->prefix('settings');
 
-        Cafesource::addRoute('options', __DIR__ . '/../routes/web.php', [
-            'prefix'     => $prefix,
-            'name'       => 'admin.options.',
-            'middleware' => 'admin'
-        ])->addLivewireComponent([
-            'admin.option.index' => \Cafesource\Option\Http\Livewire\Index::class
-        ]);
-
         $this->loadBookmarks();
         $this->loadMenus();
     }
