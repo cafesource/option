@@ -3,7 +3,8 @@
   "description": "The cafesource option",
   "keywords": [
     "cafesource",
-    "option"
+    "option",
+    "laravel"
   ],
   "license": "MIT",
   "homepage": "https://cafesource.net",
