@@ -81,7 +81,7 @@ class OptionServiceProvider extends ServiceProvider
                 'title'       => __('Settings'),
                 'route'       => route('admin.options.index'),
                 'active'      => request()->is('admin/settings'),
-                'icon'        => 'fad fa-cogs',
+                'icon'        => 'fal fa-cogs',
                 'priority'    => 20,
                 'permission'  => 'options',
                 'role'        => 'administrator',
@@ -100,7 +100,7 @@ class OptionServiceProvider extends ServiceProvider
         Bookmark::add('settings', function ( $settings ) {
             $settings->title(__('Settings'))
                 ->route(route('admin.options.index'))
-                ->icon('far fa-cogs');
+                ->icon('fal fa-cog');
         }, 10);
     }
 }
