@@ -15,7 +15,7 @@ class CreateOptions extends Migration
     {
         if ( Schema::hasTable('options') )
             return;
-        
+
         Schema::create('options', function ( Blueprint $table ) {
             $table->bigIncrements('id');
             $table->string('key', 100);
