@@ -18,7 +18,7 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-openssl": "*",
-    "cafesource/foundation": "^1.0"
+    "cafesource/foundation": "^1.0.0"
   },
   "provide": {
     "psr/container-implementation": "1.0"
