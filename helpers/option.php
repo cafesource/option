@@ -7,7 +7,7 @@ if ( !function_exists('option') ) {
     /**
      * @return Option
      */
-    function option() : Option
+    function option()
     {
         return app('cafesource.option');
     }
