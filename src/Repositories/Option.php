@@ -58,9 +58,9 @@ class Option
      *
      * @return mixed
      */
-    public function autoload( $key = 'autoload' )
+    public function autoload( array $key = ['autoload'] )
     {
-        return $this->option->where('option', $key)->get()->toArray();
+        return $this->option->whereIn('option', $key)->get();
     }
 
     /**
@@ -80,12 +80,13 @@ class Option
      *
      * @return mixed
      */
-    public function add( string $key, string $value = null, string $option = null )
+    public function add( string $key, string $value = null, string $option = null, string $format = null )
     {
         return $this->option->create([
             'key'    => $key,
             'value'  => $value,
-            'option' => $option
+            'option' => $option,
+            'format' => $format
         ]);
     }
 
