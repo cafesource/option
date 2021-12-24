@@ -1,12 +1,17 @@
 <?php
 
 return [
-    'option' => [
-        'driver' => 'eloquent',
-        'model' => \Cafesource\Option\Models\Option::class
+    /**
+     * Autoload keys
+     *
+     * Loaded the options in laravel boot
+     */
+    'autoload' => [
+        'keys' => ['autoload']
     ],
 
-    'components' => [
-//        'option.general' => \Cafesource\Option\Http\General::class
+    'option' => [
+        'driver' => 'eloquent',
+        'model'  => \Cafesource\Option\Models\Option::class
     ]
 ];
