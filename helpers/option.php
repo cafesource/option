@@ -5,10 +5,16 @@ use Cafesource\Option\Facades\Option;
 
 if ( !function_exists('option') ) {
     /**
-     * @return Option
+     * @return mixed
      */
-    function option()
+    function option( $key = null, $default = null )
     {
-        return app('cafesource.option');
+        if ( is_null($key) )
+            return app('cafesource.option');
+
+        if ( is_array($key) )
+            return app('cafesource.option')->get($key);
+
+        return app('cafesource.option')->first($key, $default);
     }
 }
