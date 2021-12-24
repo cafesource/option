@@ -2,25 +2,15 @@
 
 namespace Cafesource\Option;
 
-use Cafesource\Foundation\Facades\Cafesource;
-use Cafesource\Option\Repositories\Option as OptionRepository;
-
 class Option
 {
     /**
-     * @var null
-     */
-    protected $config;
-
-    /**
      * @var Manager
      */
-    protected static $manager;
+    protected static Manager $manager;
 
     public function __construct( $config )
     {
-        $this->config = $config;
-
         self::$manager = new Manager($config);
     }
 
