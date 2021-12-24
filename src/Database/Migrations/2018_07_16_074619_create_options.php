@@ -21,6 +21,7 @@ class CreateOptions extends Migration
             $table->string('key', 100);
             $table->longText('value')->nullable();
             $table->string('option', 100)->nullable();
+            $table->string('format', 20)->nullable();
             $table->timestamps();
         });
 
