@@ -1,9 +1,9 @@
 {
-  "name": "cafesource/options",
+  "name": "cafesource/option",
   "description": "The cafesource option",
   "keywords": [
     "cafesource",
-    "options",
+    "option",
     "laravel"
   ],
   "license": "MIT",
