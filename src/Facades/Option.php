@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Class Option
  *
- * @method static bool has(string $key)
- * @method static \Cafesource\Option\Models\Option first(string $key, $default = null)
+ * @method static bool exists(string $key)
+ * @method static mixed first(string $key, $default = null)
  * @method static mixed get(array|string $key)
  * @method static mixed add(string $key, mixed $value = null, string $option = null)
  * @method static mixed update(string $key, mixed $value = null, string $option = null)
