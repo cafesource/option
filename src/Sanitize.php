@@ -2,6 +2,8 @@
 
 namespace Cafesource\Option;
 
+use function PHPUnit\Framework\isJson;
+
 class Sanitize
 {
     /**
@@ -12,67 +14,52 @@ class Sanitize
     protected $value;
 
     /**
-     * The option format
+     * The option type
      *
-     * @var mixed|null $format
+     * @var mixed|null $type
      */
-    protected $format;
+    protected $type = null;
 
-    public function __construct( $value, $format = null )
+    public function __construct( $value, $type = null )
     {
-        $this->value  = $value;
-        $this->format = $format;
+        $this->value = $value;
+        $this->type  = $type;
     }
 
     /**
-     * The option value with format
+     * The option value with type
      *
      * @param $value
-     * @param $format
+     * @param $type
      *
      * @return Sanitize
      */
-    public static function value( $value, $format = null ) : Sanitize
+    public static function value( $value, $type = null ) : Sanitize
     {
-        return new self($value, $format);
+        return new self($value, $type);
     }
 
     /**
-     * Set the format
+     * Set the type
      *
      * @param $name
      *
      * @return $this
      */
-    public function format( $name ) : Sanitize
+    public function type( $name ) : Sanitize
     {
-        $this->format = $name;
+        $this->type = $name;
         return $this;
     }
 
     /**
-     * The option format
+     * The option type
      *
      * @return string
      */
-    public function getFormat() : string
+    public function getType() : string
     {
-        if ( is_bool($this->value) )
-            return 'bool';
-
-        if ( is_float($this->value) )
-            return 'float';
-
-        if ( is_numeric($this->value) )
-            return 'numeric';
-
-        if ( is_array($this->value) )
-            return 'array';
-
-        if ( is_object($this->value) )
-            return 'object';
-
-        return 'string';
+        return gettype($this->value);
     }
 
     /**
@@ -83,7 +70,7 @@ class Sanitize
     public function getString() : string
     {
         $value = $this->value;
-        if ( is_array($value) || is_object($value) )
+        if ( in_array($this->getType(), ['array', 'object']) )
             $value = serialize($value);
 
         return (string)$value;
@@ -96,18 +83,18 @@ class Sanitize
      */
     public function getValue()
     {
-        $format = $this->format ?? $this->getFormat();
-        $value  = $this->value;
-        if ( in_array($format, ['object', 'array']) )
+        $type  = $this->type ?? $this->getType();
+        $value = $this->value;
+        if ( in_array($type, ['object', 'array']) )
             return unserialize($value);
 
-        if ( $format == 'bool' )
+        if ( $type == 'boolean' )
             return (bool)$value;
 
-        if ( $format == 'float' )
-            return (float)$value;
+        if ( $type == 'double' )
+            return (double)$value;
 
-        if ( $format == 'numeric' )
+        if ( $type == 'integer' )
             return (int)$value;
 
         return $value;
