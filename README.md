@@ -46,7 +46,7 @@ option(['key','key2',...], 'default'); // options
 option()->exists('key'); // bool
 option()->update('key', 'value');
 option()->whereIn('key', ['keys',...])->orderBy('key')->get();
-option()->where('key','option')->where('format', 'numeric')->first();
+option()->where('key','option')->where('format', 'array')->first();
 option()->where('key','option')->limit(10)->groupBy('value')->get();
 ...
 ```
