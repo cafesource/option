@@ -9,7 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 
 class Manager
 {
-    protected           $config   = [];
+    protected array     $config   = [];
     protected ?Autoload $autoload = null;
 
     public function __construct( $config )
@@ -49,6 +49,8 @@ class Manager
     }
 
     /**
+     * Converting the option value to string for saving in database
+     *
      * @param $value
      * @param $format
      *
@@ -152,9 +154,12 @@ class Manager
      *
      * @return mixed
      */
-    public function add( $key, $value = null, $option = null )
+    public function add( $key, $value = null, $option = null, string $format = null )
     {
-        return $this->repository()->add($key, $value, $option);
+        $value  = $this->sanitize($value, $format)->getString();
+        $format = $this->sanitize($value, $format)->getFormat();
+
+        return $this->repository()->add($key, $value, $option, $format);
     }
 
     /**
@@ -177,10 +182,13 @@ class Manager
      */
     public function update( $key, $value = null, $option = null, $format = null )
     {
+        $value  = $this->sanitize($value, $format)->getString();
+        $format = $this->sanitize($value, $format)->getFormat();
+
         return $this->repository()->update($key, [
-            'value'  => $this->sanitize($value, $format)->getString(),
+            'value'  => $value,
             'option' => $option,
-            'format' => $this->sanitize($value, $format)->getFormat()
+            'format' => $format
         ]);
     }
 
@@ -198,12 +206,7 @@ class Manager
         if ( !$getOption )
             return $this->repository()->add($key, $value, $option, $format);
 
-        $getOption->update([
-            'value'  => $this->sanitize($value, $format)->getString(),
-            'option' => $option,
-            'format' => $format
-        ]);
-        return $getOption;
+        return $this->update($key, $value, $option, $format);
     }
 
     /**
