@@ -1,11 +1,15 @@
 <?php
 
 use Cafesource\Option\Facades\Option;
+use Illuminate\Contracts\Foundation\Application;
 
 
 if ( !function_exists('option') ) {
     /**
-     * @return mixed
+     * @param array|string $key
+     * @param mixed $default
+     *
+     * @return \Cafesource\Option\Option|Application|mixed
      */
     function option( $key = null, $default = null )
     {
