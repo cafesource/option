@@ -27,7 +27,8 @@ class Manager
      */
     public function boot()
     {
-        $this->runAutoload($this->config[ 'autoload' ][ 'keys' ]);
+        if ( empty($this->autoload->items()) )
+            $this->runAutoload($this->config[ 'autoload' ][ 'keys' ]);
     }
 
     /**
@@ -52,13 +53,13 @@ class Manager
      * Converting the option value to string for saving in database
      *
      * @param $value
-     * @param $format
+     * @param $type
      *
      * @return Sanitize
      */
-    public function sanitize( $value, $format = null ) : Sanitize
+    public function sanitize( $value, $type = null ) : Sanitize
     {
-        return new Sanitize($value, $format);
+        return new Sanitize($value, $type);
     }
 
     /**
@@ -127,7 +128,7 @@ class Manager
         if ( $option ) {
             return $this->autoload(
                 $key,
-                $this->sanitize($option->value, $option->format)->getValue()
+                $this->sanitize($option->value, $option->type)->getValue()
             )->get($key, $default);
         }
 
@@ -154,12 +155,12 @@ class Manager
      *
      * @return mixed
      */
-    public function add( $key, $value = null, $option = null, string $format = null )
+    public function add( $key, $value = null, $option = null, string $type = null )
     {
-        $value  = $this->sanitize($value, $format)->getString();
-        $format = $this->sanitize($value, $format)->getFormat();
+        $value = $this->sanitize($value, $type)->getString();
+        $type  = $this->sanitize($value, $type)->getType();
 
-        return $this->repository()->add($key, $value, $option, $format);
+        return $this->repository()->add($key, $value, $option, $type);
     }
 
     /**
@@ -176,19 +177,19 @@ class Manager
      * @param      $key
      * @param null $value
      * @param null $option
-     * @param null $format
+     * @param null $type
      *
      * @return mixed
      */
-    public function update( $key, $value = null, $option = null, $format = null )
+    public function update( $key, $value = null, $option = null, $type = null )
     {
-        $value  = $this->sanitize($value, $format)->getString();
-        $format = $this->sanitize($value, $format)->getFormat();
+        $type  = $this->sanitize($value, $type)->getType();
+        $value = $this->sanitize($value, $type)->getString();
 
         return $this->repository()->update($key, [
             'value'  => $value,
             'option' => $option,
-            'format' => $format
+            'type'   => $type
         ]);
     }
 
@@ -196,17 +197,17 @@ class Manager
      * @param             $key
      * @param             $value
      * @param string|null $option
-     * @param string|null $format
+     * @param string|null $type
      *
      * @return mixed
      */
-    public function updateOrAdd( $key, $value, string $option = null, string $format = null )
+    public function updateOrAdd( $key, $value, string $option = null, string $type = null )
     {
         $getOption = $this->repository()->findByKey($key);
         if ( !$getOption )
-            return $this->repository()->add($key, $value, $option, $format);
+            return $this->repository()->add($key, $value, $option, $type);
 
-        return $this->update($key, $value, $option, $format);
+        return $this->update($key, $value, $option, $type);
     }
 
     /**
@@ -230,7 +231,7 @@ class Manager
         foreach ( $this->repository()->autoload($key) as $option ) {
             $this->autoload->add(
                 $option->key,
-                $this->sanitize($option->value, $option->format)->getValue()
+                $this->sanitize($option->value, $option->type)->getValue()
             );
         }
     }
