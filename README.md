@@ -17,6 +17,7 @@ composer require cafesource/option
 - Add the following class to the `providers` array in `config/app.php`:
 
 ```php
+Cafesource\Foundation\CafesourceServiceProvider::class,
 Cafesource\Option\OptionServiceProvider::class,
 ```
 
