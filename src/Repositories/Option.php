@@ -80,13 +80,13 @@ class Option
      *
      * @return mixed
      */
-    public function add( string $key, string $value = null, string $option = null, string $format = null )
+    public function add( string $key, string $value = null, string $option = null, string $type = null )
     {
         return $this->option->create([
             'key'    => $key,
             'value'  => $value,
             'option' => $option,
-            'format' => $format
+            'type'   => $type
         ]);
     }
 
