@@ -88,13 +88,13 @@ class Sanitize
         if ( in_array($type, ['object', 'array']) )
             return unserialize($value);
 
-        if ( $type == 'boolean' )
+        if ( in_array($type, ['boolean', 'bool']) )
             return (bool)$value;
 
-        if ( $type == 'double' )
+        if ( in_array($type, ['double', 'float']) )
             return (double)$value;
 
-        if ( $type == 'integer' )
+        if ( in_array($type, ['integer', 'int']) )
             return (int)$value;
 
         return $value;
