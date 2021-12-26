@@ -14,7 +14,7 @@ Require this package with composer using the following command:
 composer require cafesource/option
 ```
 
-- Add the following class to the `providers` array in `config/app.php`:
+Add the following class to the `providers` array in `config/app.php`:
 
 ```php
 Cafesource\Foundation\CafesourceServiceProvider::class,
@@ -68,7 +68,7 @@ You can save any data without conversion and receive it in its original form whe
 
 ```php
 option()->add('key', [int|double|bool|array|object]);
-optino('key'); // int,double,bool,array,object
+option('key'); // int,double,bool,array,object
 ```
 
 example:
