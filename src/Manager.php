@@ -90,12 +90,24 @@ class Manager
      *
      * @return bool
      */
-    public function has( string $key ) : bool
+    public function exists( string $key ) : bool
     {
         if ( $this->repository()->exists($key) )
             return true;
 
         return false;
+    }
+
+    /**
+     * Checking the option
+     *
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function has( string $key ) : bool
+    {
+        return $this->exists($key);
     }
 
     /**
