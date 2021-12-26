@@ -29,9 +29,13 @@ php artisan vendor:publish --provider="Cafesource\Option\OptionServiceProvider"
 ### Usage
 
 ```php
-option('key', 'default'); // Value
+option('key', 'default'); // value
+option(['key','key2',...], 'default'); // options
+option()->exists('key'); // bool
 option()->update('key', 'value');
-option(['key','key2',...], 'default') // options
+option()->whereIn('key', ['keys',...])->orderBy('key')->get();
+option()->where('key','option')->where('format', 'numeric')->first();
+option()->where('key','option')->limit(10)->groupBy('value')->get();
 ...
 ```
 
