@@ -3,7 +3,7 @@
 <p>
 <a href="https://packagist.org/packages/cafesource/option"><img src="https://img.shields.io/packagist/dt/cafesource/option" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/cafesource/option"><img src="https://img.shields.io/packagist/v/cafesource/option" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/cafesource/option" alt="License"></a>
+<a href="https://packagist.org/packages/cafesource/option"><img src="https://img.shields.io/packagist/l/cafesource/option" alt="License"></a>
 </p>
 
 ### Installation
