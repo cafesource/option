@@ -95,10 +95,7 @@ class Manager
      */
     public function exists( string $key ) : bool
     {
-        if ( $this->repository()->exists($key) )
-            return true;
-
-        return false;
+        return $this->repository()->exists($key);
     }
 
     /**
@@ -203,8 +200,7 @@ class Manager
      */
     public function updateOrAdd( $key, $value, string $option = null, string $type = null )
     {
-        $getOption = $this->repository()->findByKey($key);
-        if ( !$getOption )
+        if ( !$this->repository()->findByKey($key) )
             return $this->repository()->add($key, $value, $option, $type);
 
         return $this->update($key, $value, $option, $type);
