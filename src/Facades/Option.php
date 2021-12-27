@@ -1,9 +1,7 @@
 <?php
 
-
 namespace Cafesource\Option\Facades;
 
-use Cafesource\Option\Option as OptionModule;
 use Illuminate\Support\Facades\Facade;
 
 /**
