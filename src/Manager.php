@@ -154,10 +154,12 @@ class Manager
      */
     public function add( $key, $value = null, $option = null, string $type = null )
     {
-        $value = $this->sanitize($value, $type)->getString();
-        $type  = $this->sanitize($value, $type)->getType();
-
-        return $this->repository()->add($key, $value, $option, $type);
+        return $this->repository()->add(
+            $key,
+            $this->sanitize($value, $type)->getString(),
+            $option,
+            $this->sanitize($value, $type)->getType()
+        );
     }
 
     /**
@@ -180,13 +182,10 @@ class Manager
      */
     public function update( $key, $value = null, $option = null, $type = null )
     {
-        $type  = $this->sanitize($value, $type)->getType();
-        $value = $this->sanitize($value, $type)->getString();
-
         return $this->repository()->update($key, [
-            'value'  => $value,
+            'value'  => $this->sanitize($value, $type)->getString(),
             'option' => $option,
-            'type'   => $type
+            'type'   => $this->sanitize($value, $type)->getType()
         ]);
     }
 
