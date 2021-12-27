@@ -16,9 +16,9 @@ class Option
     /**
      * @param $key
      *
-     * @return mixed
+     * @return bool
      */
-    public function exists( $key )
+    public function exists( $key ) : bool
     {
         return $this->option->where('key', $key)->exists();
     }
