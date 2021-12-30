@@ -6,10 +6,10 @@
     "cafesource",
     "option",
     "laravel",
-    "laravel-options"
+    "laravel-option"
   ],
   "license": "MIT",
-  "homepage": "https://cafesource.net",
+  "homepage": "https://github.com/cafesource/option",
   "authors": [
     {
       "name": "Mahdi akbari",
